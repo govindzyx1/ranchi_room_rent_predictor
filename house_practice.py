@@ -15,24 +15,14 @@ def predict():
     For rendering results on HTML GUI
     
     '''
-    message=request.form.to_dict()# convert incoming immutable data to mutable
-    area=message['place']
-    print(message)
-    if area=='harmu':
-        area=0;
-    elif area=='kanke':
-        area=1;
-    message['place']=area
-    print(message)
-    
-    int_features = [int(x) for x in message.values()]
+    int_features=request.form
     print(int_features)
+    int_features = [int(x) for x in request.form.values()]
     
     final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
 
     output = round(prediction[0], 2)
-    print(output)
 
     return render_template('index.html', prediction_text='Rent for above requirement Rs.{}'.format(output))
 

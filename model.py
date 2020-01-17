@@ -16,7 +16,7 @@ label_encoder = LabelEncoder()
 df['place']= label_encoder.fit_transform(df['place'])
 
 
-X = df.iloc[:, :-1]
+X = df.iloc[:, :-2]
 y = df.iloc[:, -1]
 
 #Splitting Training and Test Set
@@ -30,8 +30,5 @@ regressor.fit(X, y)
 
 # Saving model to disk
 pickle.dump(regressor, open('model.pkl','wb'))
-
-
-
 
 
